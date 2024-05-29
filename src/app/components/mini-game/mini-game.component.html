@@ -1,0 +1,41 @@
+<main class="wrapper">
+  <div class="wrapper__container">
+    <h4>Score</h4>
+    <div class="score">
+      <span>Player: {{ playerScore }}</span>
+      <span>Computer: {{ computerScore }}</span>
+    </div>
+    <div class="controls">
+      <div class="controls__item">
+        <label for="time">
+          Time for reaction click:
+        </label>
+        <input [(ngModel)]="reactionTime" id="time" placeholder="Interval (ms)" type="number"/>
+      </div>
+      <button (click)="startGame()" class="button">Start game</button>
+    </div>
+    <div class="board">
+      <div (click)="onCellClick(i)"
+           *ngFor="let cell of cells; let i = index"
+           [ngClass]="{
+         'blue': cell === 'blue',
+         'yellow': cell === 'yellow',
+         'green': cell === 'green',
+         'red': cell === 'red'
+       }">
+      </div>
+    </div>
+
+    <div *ngIf="gameOver" class="modal">
+      <div class="modal__content">
+        <p>Congrats!</p>
+        <p>{{ winnerMessage }}</p>
+        <div class="modal__buttons">
+        <button (click)="restartGame()" class="button">Restart</button>
+        <button (click)="exitGame()" class="button">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
